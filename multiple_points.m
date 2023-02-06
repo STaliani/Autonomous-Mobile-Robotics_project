@@ -25,6 +25,7 @@ ax = gca;
 ax.XAxis.Limits = [0 10];
 ax.YAxis.Limits = [0 10];
 ax.ZAxis.Limits = [0 10];
+axis equal
 mu=0.65; % coeff, gomma su cemento asciutto
 
 plot3(px,py,pz,"r");
@@ -71,11 +72,14 @@ for i=(1:5)
     %wrench cone
     [x,y,z]=cylinder((0:0.1:1)*mu*norm(f_n),4);
 
+          
+
+    
     % Rotate the cone to align with the direction vector
     alpha=atan(-0.5);
     R = [cos(alpha),        0,       sin(alpha) ;
                   0,        1,                0 ;
-        -sin(alpha),        0,       cos(alpha)];                                                  
+        -sin(alpha),        0,       cos(alpha)];  
     for j = 1:size(x, 2)
         [x(:, j), y(:, j), z(:, j)] = apply_rotation(x(:, j), y(:, j), z(:, j), R);
     end
@@ -84,9 +88,13 @@ for i=(1:5)
     x = x + px(i);
     y = y + py(i);
     z = z + pz(i);
-    X(i,1:4)=x(11,1:4);
-    Y(i,1:4)=y(11,1:4);
-    Z(i,1:4)=z(11,1:4);
+    temp1=R'*[x(1,1:4);y(1,1:4);z(1,1:4)];
+    temp =R'*[x(11,1:4);y(11,1:4);z(11,1:4)];
+    X(i,1:4)=temp(1,1:4);
+    Y(i,1:4)=temp(2,1:4);
+    Z(i,1:4)=temp(3,1:4);    
+
+    
     % Plot the cone
     h = surf(x, y, z);
 
@@ -95,7 +103,7 @@ for i=(1:5)
 
     Vi=zeros(3,4);
     for j=(1:4)
-        v=[X(i,j)-x(1,j),Y(i,j)-y(1,j),Z(i,j)-z(1,j)]';
+        v=[X(i,j)-temp1(1,j),Y(i,j)-temp1(2,j),Z(i,j)-temp1(3,j)]';
         Vi(1:3,j)=v;
     end
     V(3*(i-1)+1:3*(i-1)+3,1:4)=Vi;
@@ -109,10 +117,14 @@ for i=(1:3:3*np)
         else
             ui=cross(V(i:i+2,j+1),V(i:i+2,j));
         end
-        if j==4
-            quiver3((X((i+2)/3,j)+X((i+2)/3,1))/2,(Y((i+2)/3,j)+Y((i+2)/3,1))/2,(Z((i+2)/3,j)+Z((i+2)/3,1))/2,ui(1),ui(2),ui(3),'b','LineWidth',2)
+        temp1=R*[X((i+2)/3,j);Y((i+2)/3,j);Z((i+2)/3,j)];
+        temp3=R*ui;
+        if j==4            
+            temp2=R*[X((i+2)/3,1);Y((i+2)/3,1);Z((i+2)/3,1)];
+            quiver3((temp1(1)+temp2(1))/2,(temp1(2)+temp2(2))/2,(temp1(3)+temp2(3))/2,temp3(1),temp3(2),temp3(3),'b','LineWidth',2)
         else
-            quiver3((X((i+2)/3,j)+X((i+2)/3,j+1))/2,(Y((i+2)/3,j)+Y((i+2)/3,j+1))/2,(Z((i+2)/3,j)+Z((i+2)/3,j+1))/2,ui(1),ui(2),ui(3),'b','LineWidth',2)
+            temp2=R*[X((i+2)/3,j+1);Y((i+2)/3,j+1);Z((i+2)/3,j+1)];
+            quiver3((temp1(1)+temp2(1))/2,(temp1(2)+temp2(2))/2,(temp1(3)+temp2(3))/2,temp3(1),temp3(2),temp3(3),'b','LineWidth',2)
         end
         U(i:i+2,j)=ui;
     end
@@ -157,7 +169,7 @@ for i=(1:4)
 end
 
 
-
+axis equal
 
 
 
@@ -179,3 +191,4 @@ function [x, y, z] = apply_rotation(x, y, z, R)
     y = reshape(rotated_points(:, 2), size(y));
     z = reshape(rotated_points(:, 3), size(z));
 end
+
