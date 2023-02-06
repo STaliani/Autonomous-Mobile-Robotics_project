@@ -8,3 +8,7 @@ multiple_points.m :                                extends the simple contact to
                                                                defines the stance given by the contact on the surface,
                     computes the correspondent Gravito-Inertial cone applied to the Center of pressure of the surface.
 
+multiple_surfaces.m:           extends multiple contact considering the same pattern of contacts on multiple surfaces,
+                                                                         computes span and face form for each surface,
+                                                                   defines the stance considering all contact sufaces,
+                                          computes Gravito_Inertial wrench cone applied to an arbitrarily choosen CoM.
