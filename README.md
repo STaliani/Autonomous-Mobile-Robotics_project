@@ -12,3 +12,7 @@ multiple_surfaces.m:           extends multiple contact considering the same pat
                                                                          computes span and face form for each surface,
                                                                    defines the stance considering all contact sufaces,
                                           computes Gravito_Inertial wrench cone applied to an arbitrarily choosen CoM.
+gravito_inertial_wrench.m:                                    it is basically multiple_surfaces but in function shape,
+                                                                                                input array of struct, 
+                                                                                 output wrench cone and its face form,
+                                the struct represents a surface by its contact points and static friction coefficient.       
