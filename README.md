@@ -5,4 +5,4 @@ This repo contains matlab files
 Contains the steps we did to generate a gravito-inertial wrench cone. 
 
 ### trajectory_generation directory:
-Contains script that generates feasible CoM trajectories constrained by gravito_inertial cones.
+Contains scripts that generate feasible CoM trajectories constrained by gravito_inertial cones.
