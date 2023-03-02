@@ -7,5 +7,5 @@ CoM=[0;0;10];
 % answ1=gravito_inertial_wrench_corretto(surfaces(1:2),CoM);
 % axis equal
 figure
-answ2=gravito_inertial_wrench_prova_m(surfaces(1:2),CoM);
+answ2=gravito_inertial_wrench(surfaces(1:2),CoM);
 axis equal
