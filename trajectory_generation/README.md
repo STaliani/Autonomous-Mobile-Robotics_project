@@ -16,7 +16,8 @@ Generates the face form of a rectuangular surfaces with width 2*X and heigth 2*Y
 converts the representation of che cone in span through span_of_face.m form and returns it.\
 
 ### span_of_face.m & face_of_span.m:
-They use the pycdd lib to go from a representation to another of the double description.\
+They use the pycdd lib, through files face_to_span.py and span_to_face.py,\
+to go from a representation to another of the double description.\
        
 ### GIWC_caller:
 It is useful to call gravito_inertial_wrench.m without starting the optimization problem.\
