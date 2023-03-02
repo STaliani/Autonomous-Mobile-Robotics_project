@@ -11,7 +11,10 @@ Generates the GIWC of surface(s) in input,\
 uses the function functions face_span_gen.m to get the span form of each surface wrench cone,\
 combines span forms to create GIWC and the convert it in face form using face_of_span.m .\
                                         
-### iterative_one_stance.m :
-The problem of multiple stances optimization is solved by optimizing the trajectory considering one stance at a time,\
-The one stances problem is solved n_stances times varing initial, final positions and Gravito-inertial wrench cones.\
+### face_span_gen.m :
+Generates the face form of a rectuangular surfaces with width 2*X and heigth 2*Y,\
+converts the representation of che cone in span through span_of_face.m form and returns it.\
+
+### span_of_face.m & face_of_span:
+They use the pycdd lib to go from a representation to another of the double description.\
        
