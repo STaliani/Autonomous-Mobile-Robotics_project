@@ -7,4 +7,4 @@ Contains the steps we did to understand and generate a gravito-inertial wrench c
 ### trajectory_generation directory:
 Contains scripts which generate feasible CoM trajectories constrained by gravito_inertial cones.
 
-A more detailed documentation is contained in [project_documentation.pdf](https://github.com/STaliani/AMR_project/blob/main/project_documentation.pdf)
+An explenation of the project is contained in [project_documentation.pdf](https://github.com/STaliani/AMR_project/blob/main/project_documentation.pdf)
