@@ -5,7 +5,7 @@ function UGI = gravito_inertial_wrench(surfaces, CoM)
 %   surface.mu= static friction coefficient of the surface
 %   this function plots contact wrenches and computes the gravito-inertial
 %   wrench of the stance
-    addpath('polytopes_2017_10_04_v1.9\')
+
     %number of contact planes
     planes=length(surfaces);
 
@@ -33,14 +33,13 @@ function UGI = gravito_inertial_wrench(surfaces, CoM)
         
         [x1, y1] = meshgrid(MIN_MAX_x(1,plane):0.1:MIN_MAX_x(2,plane), MIN_MAX_y(1,plane):0.1:MIN_MAX_y(2,plane)); % Generate x and y data
         z1=(-planes_coef(plane,1)*x1-planes_coef(plane,2)*y1-planes_coef(plane,4))/planes_coef(plane,3); % Solve for z data
-        surf(x1,y1,z1) %Plot the surface
+         surf(x1,y1,z1) %Plot the surface
         hold on
         
         %contact points visualization 
         px=surfaces(plane).contact_pts(1,:);
         py=surfaces(plane).contact_pts(2,:);
         pz=surfaces(plane).contact_pts(3,:);
-        plot3(px,py,pz,'r')
         
         %normal and tangential vectors wrt plane
         tx=[1;0;(-planes_coef(plane,1))/planes_coef(plane,3)];
@@ -54,11 +53,6 @@ function UGI = gravito_inertial_wrench(surfaces, CoM)
         %for each contact point
         for i=(1:np)
             
-            %plane's vector visualization 
-             %quiver3(px(i),py(i),pz(i),n(1),n(2),n(3),'r','LineWidth',2)
-             %quiver3(px(i),py(i),pz(i),t(1),t(2),t(3),'g','LineWidth',2)
-%             quiver3(px(i),py(i),pz(i),tx(1),tx(2),tx(3),'b','LineWidth',2)
-%             quiver3(px(i),py(i),pz(i),ty(1),ty(2),ty(3),'b','LineWidth',2)
         
             %friction cone's point generation
             [x,y,z]=cylinder((0:0.1:1)*mu,6);
@@ -86,7 +80,7 @@ function UGI = gravito_inertial_wrench(surfaces, CoM)
             z = z + pz(i);
             
             % Plot the cone
-            surf(x, y, z); 
+             surf(x, y, z); 
         end % here we finish to consider all contantact points in a plane
         
         % generation of wrench cone's span form of the surface 
@@ -94,7 +88,6 @@ function UGI = gravito_inertial_wrench(surfaces, CoM)
             
         %Surface wrench creation
         Cop=Cop_function(surfaces(plane).contact_pts); %center of pressure 
-        
 
         Astance(:,(plane-1)*6+1:plane*6)=[          -R,   zeros(3,3) ;
                                           -skew(Cop)*R,           -R];
@@ -116,7 +109,6 @@ function UGI = gravito_inertial_wrench(surfaces, CoM)
         %quiver3(CoM(1),CoM(2),CoM(3),VGI(4,i)/10,VGI(5,i)/10,VGI(6,i)/10,'r','LineWidth',2)
     end
 
-    %VGI=licols(VGI)
     UGI = face_of_span(VGI);
 
 end
