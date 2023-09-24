@@ -8,4 +8,5 @@ Contains the steps we did to understand and generate a gravito-inertial wrench c
 Contains scripts which generate feasible CoM trajectories constrained by gravito_inertial cones.
 
 The content of the matlab scripts is explained in [project_documentation.pdf](https://github.com/STaliani/AMR_project/blob/main/project_documentation.pdf)
+
 An overwiew of the project is presented in [Final_report.pdf](https://github.com/STaliani/Autonomous-Mobile-Robotics_project/blob/main/Final_report.pdf)
